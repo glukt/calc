@@ -6,7 +6,7 @@ const topics = [
     "id": "optimization",
     "title": "Quadratic Optimization (Vertex)",
     "trigger": "Prompt asks for 'maximum area', 'minimum cost', or optimal dimensions of a quadratic function.",
-    "formula": "Vertex occurs at $t = -\\frac{b}{2a}$",
+    "formula": "Vertex occurs at\n$$t = -\\frac{b}{2a}$$",
     "pitfall": "Incomplete Execution: The formula only gives the INPUT (e.g., width). To find the maximum AREA, you MUST substitute $t$ back into the original $h(t)$ function.",
     "example": {
       "problem": "Find the maximum area of a rectangular enclosure given $A(x) = -2x^2 + 40x$.",
@@ -17,7 +17,7 @@ const topics = [
     "id": "difference_quotient",
     "title": "The Difference Quotient",
     "trigger": "Prompt asks for 'average rate of change' or explicitly to evaluate the difference quotient.",
-    "formula": "\\frac{f(x+h) - f(x)}{h}",
+    "formula": "$$\\frac{f(x+h) - f(x)}{h}$$",
     "pitfall": "The Subtraction Trap & Destruction Checkpoint: You MUST distribute the negative sign to the entire $f(x)$ polynomial. Before factoring out $h$, EVERY term in the numerator without an $h$ MUST cancel to zero.",
     "example": {
       "problem": "Evaluate for $f(x) = x^2 - 3x$.",
@@ -28,7 +28,7 @@ const topics = [
     "id": "rational_characteristics",
     "title": "Rational Functions: Asymptotes & Holes",
     "trigger": "Prompt asks to identify vertical/horizontal asymptotes, holes, or intercepts.",
-    "formula": "Holes: Canceled factors.\nVA: Denominator = 0.\nHA: Compare degrees (Top = Bottom \\rightarrow ratio of coefficients).",
+    "formula": "Holes: Canceled factors.\nVA: Denominator = 0.\nHA: Compare degrees (Top = Bottom $\\rightarrow$ ratio of coefficients).",
     "pitfall": "Order of Operations: ALWAYS factor the top and bottom completely first. If a term cancels out (e.g., $(x-2)/(x-2)$), it is a HOLE, not a vertical asymptote. Do this before finding VAs.",
     "example": {
       "problem": "Find characteristics of $f(x) = \\frac{x^2 - 4}{x - 2}$",
@@ -151,7 +151,7 @@ const MathRenderer = ({ text, block = false }) => {
             return window.katex.renderToString(math, { throwOnError: false, displayMode: true });
           } else if (part.startsWith('$') && part.endsWith('$')) {
             const math = part.slice(1, -1);
-            return window.katex.renderToString(math, { throwOnError: false, displayMode: false });
+            return window.katex.renderToString("\\displaystyle " + math, { throwOnError: false, displayMode: false });
           }
           return part.replace(/\\n/g, '<br/>');
         }).join('');
@@ -299,8 +299,8 @@ const App = () => {
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/20 transition-all duration-700"></div>
                   <h3 className="text-indigo-400 text-xs font-black tracking-widest uppercase mb-6 relative z-10">The Formula</h3>
                   <div className="text-3xl md:text-5xl text-white font-medium py-2 relative z-10 math-display w-full drop-shadow-md">
-                    {/* Add $$ around formula to force block display in KaTeX if not present */}
-                    <MathRenderer text={activeTopic.formula.includes('$') ? activeTopic.formula : `$$\\displaystyle ${activeTopic.formula}$$`} block={true} />
+                    {/* Render formula explicitly without forcing block styling implicitly */}
+                    <MathRenderer text={activeTopic.formula} block={true} />
                   </div>
                 </div>
 
