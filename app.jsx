@@ -153,7 +153,7 @@ const MathRenderer = ({ text, block = false }) => {
             const math = part.slice(1, -1);
             return window.katex.renderToString("\\displaystyle " + math, { throwOnError: false, displayMode: false });
           }
-          return part.replace(/\\n/g, '<br/>');
+          return part.replace(/\n|\\n/g, '<br/>');
         }).join('');
         containerRef.current.innerHTML = innerHTML;
       } catch (e) {
@@ -298,7 +298,7 @@ const App = () => {
                 <div className="glass-panel rounded-3xl p-10 border border-white/5 relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[200px] group hover:border-indigo-500/30 transition-colors duration-500">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/20 transition-all duration-700"></div>
                   <h3 className="text-indigo-400 text-xs font-black tracking-widest uppercase mb-6 relative z-10">The Formula</h3>
-                  <div className="text-3xl md:text-5xl text-white font-medium py-2 relative z-10 math-display w-full drop-shadow-md">
+                  <div className="text-xl md:text-2xl text-white font-medium py-2 relative z-10 math-display w-full drop-shadow-md leading-relaxed tracking-wide">
                     {/* Render formula explicitly without forcing block styling implicitly */}
                     <MathRenderer text={activeTopic.formula} block={true} />
                   </div>
