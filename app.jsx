@@ -59,6 +59,82 @@ const topics = [
   }
 ];
 
+const practiceProblems = [
+  {
+    "category_id": "optimization",
+    "problem_statement": "You have 120 feet of fencing to enclose a rectangular garden against an existing brick wall. Find the dimensions that maximize the area, and state the maximum area.",
+    "key_points_to_remember": [
+      "Define the perimeter constraint first: 2x + y = 120",
+      "Isolate 'y' and substitute into Area = x * y",
+      "The formula $t = -\\frac{b}{2a}$ only gives the width. You MUST plug it back into the Area function to get the final answer."
+    ],
+    "execution_steps": [
+      {"step": 1, "description": "Constraint: $y = 120 - 2x$"},
+      {"step": 2, "description": "Area Function: $A(x) = x(120 - 2x) \\rightarrow -2x^2 + 120x$"},
+      {"step": 3, "description": "Vertex Input: $x = -\\frac{120}{2(-2)} = 30$ feet (Width)"},
+      {"step": 4, "description": "Output (Max Area): $A(30) = -2(30)^2 + 120(30) = 1800$ sq ft"}
+    ]
+  },
+  {
+    "category_id": "difference_quotient",
+    "problem_statement": "Evaluate the difference quotient $\\frac{f(x+h) - f(x)}{h}$ for the function $f(x) = -2x^2 + 5x - 3$.",
+    "key_points_to_remember": [
+      "Wrap the subtracted $f(x)$ in parentheses and distribute the negative sign to every term.",
+      "DESTRUCTION CHECKPOINT: Before factoring out $h$, every term without an $h$ in the numerator must cancel out."
+    ],
+    "execution_steps": [
+      {"step": 1, "description": "Substitute: $-2(x+h)^2 + 5(x+h) - 3$"},
+      {"step": 2, "description": "Expand: $-2x^2 - 4xh - 2h^2 + 5x + 5h - 3$"},
+      {"step": 3, "description": "Subtract $f(x)$: $(-2x^2 - 4xh - 2h^2 + 5x + 5h - 3) - (-2x^2 + 5x - 3)$"},
+      {"step": 4, "description": "Checkpoint Cancel: $-4xh - 2h^2 + 5h$ remains in numerator."},
+      {"step": 5, "description": "Factor & Simplify: $\\frac{h(-4x - 2h + 5)}{h} \\rightarrow -4x - 2h + 5$"}
+    ]
+  },
+  {
+    "category_id": "rational_characteristics",
+    "problem_statement": "Find the domain, holes, vertical asymptotes (VA), and horizontal asymptotes (HA) for $f(x) = \\frac{x^2 - x - 6}{x^2 - 9}$.",
+    "key_points_to_remember": [
+      "NEVER find asymptotes before factoring completely.",
+      "If a factor cancels from the top and bottom, it is a HOLE, not a VA.",
+      "HA is found by comparing the leading degrees of the original polynomial."
+    ],
+    "execution_steps": [
+      {"step": 1, "description": "Factor completely: $\\frac{(x-3)(x+2)}{(x-3)(x+3)}$"},
+      {"step": 2, "description": "Holes: $(x-3)$ cancels. Hole exists at $x = 3$."},
+      {"step": 3, "description": "Vertical Asymptotes: Remaining denominator is $(x+3)$. VA at $x = -3$."},
+      {"step": 4, "description": "Horizontal Asymptotes: Degrees are equal ($x^2$ over $x^2$). Ratio is $1/1$. HA at $y = 1$."}
+    ]
+  },
+  {
+    "category_id": "inverse_functions",
+    "problem_statement": "Find the inverse function $f^{-1}(x)$ for $f(x) = \\sqrt{3x - 12}$ and state its domain.",
+    "key_points_to_remember": [
+      "The Range of the original function becomes the Domain of the inverse.",
+      "The output of a primary square root is always $\\ge 0$, so the inverse domain must be $x \\ge 0$."
+    ],
+    "execution_steps": [
+      {"step": 1, "description": "Original Range constraint: Square root outputs $y \\ge 0$."},
+      {"step": 2, "description": "Swap Variables: $x = \\sqrt{3y - 12}$"},
+      {"step": 3, "description": "Square both sides: $x^2 = 3y - 12$"},
+      {"step": 4, "description": "Isolate $y$: $y = \\frac{1}{3}x^2 + 4$"},
+      {"step": 5, "description": "Apply Domain Restriction: $f^{-1}(x) = \\frac{1}{3}x^2 + 4$, for $x \\ge 0$"}
+    ]
+  },
+  {
+    "category_id": "extrema_vocabulary",
+    "problem_statement": "A polynomial graph has a valley at $(4, -12)$. A) Where does the local minimum occur? B) What is the local minimum?",
+    "key_points_to_remember": [
+      "'Where' or 'At what value' ALWAYS means the input ($x$-coordinate).",
+      "'What is' or 'Minimum value' ALWAYS means the output ($y$-coordinate).",
+      "Do not provide a full coordinate pair."
+    ],
+    "execution_steps": [
+      {"step": 1, "description": "Question A ('Where'): Requests the $x$-coordinate. Answer is $4$."},
+      {"step": 2, "description": "Question B ('What is'): Requests the $y$-coordinate. Answer is $-12$."}
+    ]
+  }
+];
+
 // --- Components ---
 
 const MathRenderer = ({ text, block = false }) => {
@@ -90,7 +166,6 @@ const MathRenderer = ({ text, block = false }) => {
   return <span ref={containerRef} className={block ? "block w-full" : "inline"} />;
 };
 
-// SVG Icons (Lucide alternatives inline since dynamic cdn loading reacts weirdly sometimes)
 const Icons = {
   BookOpen: () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>,
   Brain: () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/></svg>,
@@ -104,11 +179,15 @@ const App = () => {
   const [activeTopic, setActiveTopic] = useState(topics[0]);
   const [testMode, setTestMode] = useState(false);
   const [revealed, setRevealed] = useState(false);
+  const [revealedStepIndex, setRevealedStepIndex] = useState(-1);
 
-  // Reset reveal state when topic changes or test mode toggles
+  // Reset reveal states when topic changes or test mode toggles
   useEffect(() => {
     setRevealed(false);
+    setRevealedStepIndex(-1);
   }, [activeTopic, testMode]);
+
+  const currentProblem = practiceProblems.find(p => p.category_id === activeTopic.id);
 
   return (
     <div className="flex flex-col md:flex-row h-screen overflow-hidden font-sans text-slate-100">
@@ -240,27 +319,74 @@ const App = () => {
                   </div>
                 </div>
 
-                {/* 4. Interactive Example */}
-                <div className="glass-panel rounded-3xl border border-white/5 overflow-hidden transition-all duration-500 hover:border-white/10">
-                  <div className="bg-slate-900/50 px-8 py-5 border-b border-white/5 flex items-center gap-3">
-                    <div className="text-slate-400"><Icons.BookOpen /></div>
-                    <h3 className="text-slate-200 font-bold text-xs tracking-widest uppercase">Example Walkthrough</h3>
-                  </div>
-                  <div className="p-8 space-y-6">
-                    <div className="bg-slate-950/50 rounded-2xl p-6 text-slate-200 shadow-inner border border-white/5">
-                      <strong className="text-white mb-2 block font-bold text-sm uppercase tracking-wider text-slate-400">Problem Space</strong>
-                      <div className="text-lg"><MathRenderer text={activeTopic.example.problem} /></div>
+                {/* 4. Practice Problem (Progressive Accordion) */}
+                {currentProblem && (
+                  <div className="glass-panel rounded-3xl border border-white/5 overflow-hidden transition-all duration-500 hover:border-white/10">
+                    <div className="bg-slate-900/50 px-8 py-5 border-b border-white/5 flex items-center gap-3">
+                      <div className="text-slate-400"><Icons.BookOpen /></div>
+                      <h3 className="text-slate-200 font-bold text-xs tracking-widest uppercase">Practice Problem: Step-by-Step</h3>
                     </div>
-                    <div className="pl-6 border-l-2 border-indigo-500/30 text-slate-300 space-y-4">
-                      {activeTopic.example.solution.split('\\n').map((step, idx) => (
-                        <div key={idx} className="leading-relaxed">
-                          <MathRenderer text={step} />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                    
+                    <div className="p-8 space-y-6">
+                      {/* Problem Statement */}
+                      <div className="bg-slate-950/50 rounded-2xl p-6 text-slate-200 shadow-inner border border-white/5 mb-6">
+                        <strong className="text-white mb-3 block font-bold text-xs uppercase tracking-wider text-slate-400">Problem Space</strong>
+                        <div className="text-lg leading-relaxed font-medium"><MathRenderer text={currentProblem.problem_statement} /></div>
+                      </div>
 
+                      {/* Key Points */}
+                      <div className="bg-indigo-950/30 border border-indigo-500/20 rounded-2xl p-6 mb-8">
+                        <h4 className="text-indigo-400 font-extrabold text-xs tracking-widest uppercase mb-4 flex items-center gap-2"><Icons.Brain /> Key Points to Remember</h4>
+                        <ul className="list-disc list-outside ml-4 space-y-2 text-slate-300 text-sm">
+                          {currentProblem.key_points_to_remember.map((point, idx) => (
+                            <li key={idx} className="pl-1 leading-relaxed"><MathRenderer text={point} /></li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Progressive Steps */}
+                      <div className="space-y-6 relative pt-4">
+                        <div className="absolute left-[26px] top-6 bottom-4 w-1 bg-white/5 rounded-full z-0"></div>
+                        
+                        {currentProblem.execution_steps.map((step, idx) => {
+                          const isRevealed = idx <= revealedStepIndex;
+                          const isNext = idx === revealedStepIndex + 1;
+                          const isCheckpoint = step.description.toLowerCase().includes('checkpoint');
+
+                          if (!isRevealed && !isNext) return null;
+
+                          if (isNext) {
+                            return (
+                              <div key={idx} className="relative z-10 pl-16 pt-2 pb-4">
+                                <button
+                                  onClick={() => setRevealedStepIndex(idx)}
+                                  className="flex items-center gap-2 px-6 py-3 bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-600/40 hover:text-white hover:border-indigo-500/50 font-bold text-sm rounded-xl transition-all duration-300 shadow-lg shadow-indigo-500/10"
+                                >
+                                  <Icons.Eye /> Reveal Step {step.step}
+                                </button>
+                              </div>
+                            );
+                          }
+
+                          return (
+                            <div key={idx} className={`relative z-10 pl-16 transition-all duration-500 ${isCheckpoint ? 'scale-[1.02]' : ''}`}>
+                              <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-[56px] h-[56px] flex items-center justify-center rounded-2xl font-black text-xl border-2 z-20 transition-colors duration-500 shadow-xl ${isCheckpoint ? 'bg-amber-950 border-amber-500 text-amber-400 shadow-amber-500/30' : 'bg-slate-900 border-indigo-500/50 text-indigo-400 shadow-black/50'}`}>
+                                {step.step}
+                              </div>
+                              <div className={`rounded-2xl p-6 border transition-colors duration-500 shadow-lg ${isCheckpoint ? 'bg-amber-950/30 border-amber-500/50' : 'bg-white/5 border-white/5 hover:bg-white/10'}`}>
+                                {isCheckpoint && <span className="block text-amber-500 text-[10px] font-black uppercase tracking-widest mb-3 flex items-center gap-2"><Icons.AlertTriangle /> Destruction Checkpoint</span>}
+                                <div className={`text-slate-200 text-[16px] leading-relaxed ${isCheckpoint ? 'font-medium' : ''}`}>
+                                  <MathRenderer text={step.description} />
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                        
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
