@@ -6,7 +6,7 @@ const topics = [
     "id": "optimization",
     "title": "Quadratic Optimization (Vertex)",
     "trigger": "Prompt asks for 'maximum area', 'minimum cost', or optimal dimensions of a quadratic function.",
-    "formula": "Vertex occurs at\n$$t = -\\frac{b}{2a}$$",
+    "formula": "$$\\text{Vertex } x = -\\frac{b}{2a}$$",
     "pitfall": "Incomplete Execution: The formula only gives the INPUT (e.g., width). To find the maximum AREA, you MUST substitute $t$ back into the original $h(t)$ function.",
     "example": {
       "problem": "Find the maximum area of a rectangular enclosure given $A(x) = -2x^2 + 40x$.",
@@ -28,7 +28,7 @@ const topics = [
     "id": "rational_characteristics",
     "title": "Rational Functions: Asymptotes & Holes",
     "trigger": "Prompt asks to identify vertical/horizontal asymptotes, holes, or intercepts.",
-    "formula": "Holes: Canceled factors.\nVA: Denominator = 0.\nHA: Compare degrees (Top = Bottom $\\rightarrow$ ratio of coefficients).",
+    "formula": "$$\\begin{aligned} \\text{Holes:} & \\quad \\text{Canceled factors} \\\\ \\text{VA:} & \\quad \\text{Denominator } = 0 \\\\ \\text{HA:} & \\quad \\text{Compare degrees } (\\text{Top vs Bottom}) \\end{aligned}$$",
     "pitfall": "Order of Operations: ALWAYS factor the top and bottom completely first. If a term cancels out (e.g., $(x-2)/(x-2)$), it is a HOLE, not a vertical asymptote. Do this before finding VAs.",
     "example": {
       "problem": "Find characteristics of $f(x) = \\frac{x^2 - 4}{x - 2}$",
@@ -39,7 +39,7 @@ const topics = [
     "id": "inverse_functions",
     "title": "Inverse Functions $f^{-1}(x)$",
     "trigger": "Prompt asks to find the inverse function or its domain.",
-    "formula": "1. Swap $x$ and $y$.\n2. Isolate the new $y$.",
+    "formula": "$$\\begin{aligned} &\\text{1. Swap } x \\text{ and } y \\\\ &\\text{2. Isolate the new } y \\end{aligned}$$",
     "pitfall": "Domain/Range Negligence: The Domain of $f(x)$ is the Range of $f^{-1}(x)$. If the original function is a radical or restricted rational, you must explicitly state the restricted domain for the inverse.",
     "example": {
       "problem": "Find inverse of $f(x) = \\sqrt{x-5}$",
@@ -50,7 +50,7 @@ const topics = [
     "id": "extrema_vocabulary",
     "title": "Extrema Vocabulary (At vs. Value)",
     "trigger": "Reading graphs for local maximums or minimums.",
-    "formula": "'Where' / 'At what value' = $x$-coordinate.\n'What is the minimum' / 'Value' = $y$-coordinate.",
+    "formula": "$$\\begin{aligned} \\text{“Where” or “At what value”} & \\implies x\\text{-coordinate} \\\\ \\text{“What is the minimum / value”} & \\implies y\\text{-coordinate} \\end{aligned}$$",
     "pitfall": "Over-answering: Writing the full coordinate pair $(x,y)$. The grading system will mark this wrong if it specifically asks 'What is the value?'. Give only the specific integer requested.",
     "example": {
       "problem": "A graph has a local minimum at $(4, -10)$. What is the local minimum?",
