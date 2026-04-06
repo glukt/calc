@@ -62,17 +62,17 @@ const topics = [
 const practiceProblems = [
   {
     "category_id": "optimization",
-    "problem_statement": "You have 120 feet of fencing to enclose a rectangular garden against an existing brick wall. Find the dimensions that maximize the area, and state the maximum area.",
+    "problem_statement": "You have $120$ feet of fencing to enclose a rectangular garden against an existing brick wall. Find the dimensions that maximize the area, and state the maximum area.",
     "key_points_to_remember": [
-      "Define the perimeter constraint first: 2x + y = 120",
-      "Isolate 'y' and substitute into Area = x * y",
+      "Define the perimeter constraint first: $2x + y = 120$",
+      "Isolate $y$ and substitute into $\\text{Area} = x \\cdot y$",
       "The formula $t = -\\frac{b}{2a}$ only gives the width. You MUST plug it back into the Area function to get the final answer."
     ],
     "execution_steps": [
       {"step": 1, "description": "Constraint: $y = 120 - 2x$"},
-      {"step": 2, "description": "Area Function: $A(x) = x(120 - 2x) \\rightarrow -2x^2 + 120x$"},
+      {"step": 2, "description": "Area Function: $A(x) = x(120 - 2x) \\implies A(x) = -2x^2 + 120x$"},
       {"step": 3, "description": "Vertex Input: $x = -\\frac{120}{2(-2)} = 30$ feet (Width)"},
-      {"step": 4, "description": "Output (Max Area): $A(30) = -2(30)^2 + 120(30) = 1800$ sq ft"}
+      {"step": 4, "description": "Output (Max Area): $A(30) = -2(30)^2 + 120(30) = 1800 \\text{ sq ft}$"}
     ]
   },
   {
@@ -87,7 +87,7 @@ const practiceProblems = [
       {"step": 2, "description": "Expand: $-2x^2 - 4xh - 2h^2 + 5x + 5h - 3$"},
       {"step": 3, "description": "Subtract $f(x)$: $(-2x^2 - 4xh - 2h^2 + 5x + 5h - 3) - (-2x^2 + 5x - 3)$"},
       {"step": 4, "description": "Checkpoint Cancel: $-4xh - 2h^2 + 5h$ remains in numerator."},
-      {"step": 5, "description": "Factor & Simplify: $\\frac{h(-4x - 2h + 5)}{h} \\rightarrow -4x - 2h + 5$"}
+      {"step": 5, "description": "Factor & Simplify: $\\frac{h(-4x - 2h + 5)}{h} \\implies -4x - 2h + 5$"}
     ]
   },
   {
@@ -102,7 +102,7 @@ const practiceProblems = [
       {"step": 1, "description": "Factor completely: $\\frac{(x-3)(x+2)}{(x-3)(x+3)}$"},
       {"step": 2, "description": "Holes: $(x-3)$ cancels. Hole exists at $x = 3$."},
       {"step": 3, "description": "Vertical Asymptotes: Remaining denominator is $(x+3)$. VA at $x = -3$."},
-      {"step": 4, "description": "Horizontal Asymptotes: Degrees are equal ($x^2$ over $x^2$). Ratio is $1/1$. HA at $y = 1$."}
+      {"step": 4, "description": "Horizontal Asymptotes: Degrees are equal ($x^2$ over $x^2$). Ratio is $\\frac{1}{1}$. HA at $y = 1$."}
     ]
   },
   {
@@ -124,13 +124,13 @@ const practiceProblems = [
     "category_id": "extrema_vocabulary",
     "problem_statement": "A polynomial graph has a valley at $(4, -12)$. A) Where does the local minimum occur? B) What is the local minimum?",
     "key_points_to_remember": [
-      "'Where' or 'At what value' ALWAYS means the input ($x$-coordinate).",
-      "'What is' or 'Minimum value' ALWAYS means the output ($y$-coordinate).",
+      "“Where” or “At what value” ALWAYS means the input ($x$-coordinate).",
+      "“What is” or “Minimum value” ALWAYS means the output ($y$-coordinate).",
       "Do not provide a full coordinate pair."
     ],
     "execution_steps": [
-      {"step": 1, "description": "Question A ('Where'): Requests the $x$-coordinate. Answer is $4$."},
-      {"step": 2, "description": "Question B ('What is'): Requests the $y$-coordinate. Answer is $-12$."}
+      {"step": 1, "description": "Question A (“Where”): Requests the $x$-coordinate. Answer is $4$."},
+      {"step": 2, "description": "Question B (“What is”): Requests the $y$-coordinate. Answer is $-12$."}
     ]
   }
 ];
@@ -173,6 +173,138 @@ const Icons = {
   Target: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
   ChevronRight: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>,
   Eye: () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+};
+
+const VisualDiagram = ({ categoryId }) => {
+  if (categoryId === 'optimization') {
+    return (
+      <div className="w-full flex justify-center py-6 mt-4">
+        <svg viewBox="0 0 300 200" className="w-full max-w-sm drop-shadow-2xl">
+          {/* Brick Wall */}
+          <pattern id="brick" width="30" height="20" patternUnits="userSpaceOnUse">
+            <rect width="30" height="20" fill="#1e293b" />
+            <path d="M0,10 h30 M15,10 v10 M0,0 v10 M30,0 v10" stroke="#0f172a" strokeWidth="2" />
+          </pattern>
+          <rect x="10" y="10" width="280" height="40" fill="url(#brick)" rx="4" />
+          <text x="150" y="35" fill="#475569" fontSize="14" fontWeight="bold" textAnchor="middle" letterSpacing="2">EXISTING WALL</text>
+
+          {/* Fence Area */}
+          <rect x="50" y="50" width="200" height="100" fill="#0f172a" fillOpacity="0.5" stroke="#38bdf8" strokeWidth="4" strokeDasharray="8 4" rx="2" />
+          
+          {/* Labels */}
+          <text x="35" y="105" fill="#38bdf8" fontSize="20" fontWeight="bold" textAnchor="middle">x</text>
+          <text x="265" y="105" fill="#38bdf8" fontSize="20" fontWeight="bold" textAnchor="middle">x</text>
+          <text x="150" y="175" fill="#38bdf8" fontSize="20" fontWeight="bold" textAnchor="middle">y</text>
+          
+          {/* Area Text */}
+          <text x="150" y="105" fill="#cbd5e1" fontSize="16" fontStyle="italic" textAnchor="middle">Area = x · y</text>
+        </svg>
+      </div>
+    );
+  }
+  
+  if (categoryId === 'difference_quotient') {
+    return (
+      <div className="w-full flex justify-center py-6 mt-4">
+        <svg viewBox="0 0 300 200" className="w-full max-w-md">
+          {/* Axes */}
+          <line x1="20" y1="180" x2="280" y2="180" stroke="#334155" strokeWidth="2" />
+          <line x1="40" y1="20" x2="40" y2="180" stroke="#334155" strokeWidth="2" />
+          
+          {/* Curve */}
+          <path d="M40,150 Q150,150 250,40" fill="none" stroke="#6366f1" strokeWidth="3" />
+          
+          {/* Points */}
+          <circle cx="100" cy="140" r="4" fill="#ec4899" />
+          <circle cx="200" cy="80" r="4" fill="#ec4899" />
+          
+          {/* Secant Line */}
+          <line x1="50" y1="170" x2="250" y2="50" stroke="#ec4899" strokeWidth="2" strokeDasharray="4" />
+          
+          {/* Annotations */}
+          <line x1="100" y1="140" x2="100" y2="180" stroke="#64748b" strokeDasharray="2" />
+          <line x1="200" y1="80" x2="200" y2="180" stroke="#64748b" strokeDasharray="2" />
+          <text x="100" y="195" fill="#94a3b8" fontSize="14" textAnchor="middle">x</text>
+          <text x="200" y="195" fill="#94a3b8" fontSize="14" textAnchor="middle">x+h</text>
+        </svg>
+      </div>
+    );
+  }
+
+  if (categoryId === 'rational_characteristics') {
+    return (
+      <div className="w-full flex justify-center py-6 mt-4">
+        <svg viewBox="0 0 300 200" className="w-full max-w-sm">
+          {/* Axes */}
+          <line x1="20" y1="100" x2="280" y2="100" stroke="#334155" strokeWidth="2" />
+          <line x1="150" y1="20" x2="150" y2="180" stroke="#334155" strokeWidth="2" />
+          
+          {/* Asymptotes */}
+          <line x1="90" y1="20" x2="90" y2="180" stroke="#f59e0b" strokeWidth="2" strokeDasharray="6 4" />
+          <line x1="20" y1="60" x2="280" y2="60" stroke="#10b981" strokeWidth="2" strokeDasharray="6 4" />
+          <text x="90" y="15" fill="#f59e0b" fontSize="12" textAnchor="middle">VA: x = -3</text>
+          <text x="260" y="52" fill="#10b981" fontSize="12" textAnchor="middle">HA: y = 1</text>
+          
+          {/* Curves */}
+          <path d="M20,90 Q70,90 85,180" fill="none" stroke="#6366f1" strokeWidth="3" />
+          <path d="M95,20 Q120,55 280,55" fill="none" stroke="#6366f1" strokeWidth="3" />
+          
+          {/* Hole */}
+          <circle cx="210" cy="55.5" r="4" fill="#0f172a" stroke="#ef4444" strokeWidth="2" />
+          <text x="210" y="75" fill="#ef4444" fontSize="12" textAnchor="middle">Hole (x=3)</text>
+        </svg>
+      </div>
+    );
+  }
+
+  if (categoryId === 'inverse_functions') {
+    return (
+      <div className="w-full flex justify-center py-6 mt-4">
+        <svg viewBox="0 0 300 200" className="w-full max-w-sm">
+          <line x1="20" y1="180" x2="280" y2="180" stroke="#334155" strokeWidth="2" />
+          <line x1="150" y1="20" x2="150" y2="180" stroke="#334155" strokeWidth="2" />
+          
+          {/* y=x symmetry line */}
+          <line x1="50" y1="180" x2="250" y2="20" stroke="#64748b" strokeWidth="2" strokeDasharray="5" />
+          <text x="260" y="30" fill="#64748b" fontSize="12">y = x</text>
+          
+          {/* f(x) and f^-1(x) */}
+          <path d="M150,120 Q200,120 250,50" fill="none" stroke="#6366f1" strokeWidth="3" />
+          <text x="230" y="60" fill="#6366f1" fontSize="14" fontWeight="bold">f(x)</text>
+          
+          <path d="M110,180 Q110,130 200,60" fill="none" stroke="#ec4899" strokeWidth="3" />
+          <text x="180" y="100" fill="#ec4899" fontSize="14" fontWeight="bold">f⁻¹(x)</text>
+        </svg>
+      </div>
+    );
+  }
+  
+  if (categoryId === 'extrema_vocabulary') {
+    return (
+      <div className="w-full flex justify-center py-6 mt-4">
+        <svg viewBox="0 0 300 200" className="w-full max-w-sm">
+          <line x1="20" y1="80" x2="280" y2="80" stroke="#334155" strokeWidth="2" />
+          <line x1="100" y1="20" x2="100" y2="180" stroke="#334155" strokeWidth="2" />
+          
+          {/* Parabola */}
+          <path d="M40,20 Q160,250 260,20" fill="none" stroke="#38bdf8" strokeWidth="3" />
+          
+          {/* Minimum Point */}
+          <circle cx="150" cy="135" r="5" fill="#f59e0b" />
+          
+          {/* Guidelines */}
+          <line x1="150" y1="135" x2="150" y2="80" stroke="#f59e0b" strokeDasharray="3" />
+          <line x1="150" y1="135" x2="100" y2="135" stroke="#f59e0b" strokeDasharray="3" />
+          
+          {/* Text Labels */}
+          <text x="150" y="70" fill="#cbd5e1" fontSize="12" textAnchor="middle">"Where" (x=4)</text>
+          <text x="50" y="140" fill="#cbd5e1" fontSize="12" textAnchor="middle">"What" (y=-12)</text>
+        </svg>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 const App = () => {
@@ -332,6 +464,8 @@ const App = () => {
                       <div className="bg-slate-950/50 rounded-2xl p-6 text-slate-200 shadow-inner border border-white/5 mb-6">
                         <strong className="text-white mb-3 block font-bold text-xs uppercase tracking-wider text-slate-400">Problem Space</strong>
                         <div className="text-lg leading-relaxed font-medium"><MathRenderer text={currentProblem.problem_statement} /></div>
+                        {/* Dynamic Contextual SVG */}
+                        <VisualDiagram categoryId={currentProblem.category_id} />
                       </div>
 
                       {/* Key Points */}
